@@ -9,7 +9,7 @@ const BillForm = (props) => {
         </div>
         <div>
           Description: 
-          <input value={props.newDescription} onChange={props.handleDescriptionChange} />
+          <input value={props.newDescription} onChange={props.handleDescriptioChange} />
         </div>
         <div>
           Number: 

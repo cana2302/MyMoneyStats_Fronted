@@ -34,7 +34,7 @@ const App = () => {
 
   const addBill = (event) => {
     event.preventDefault()
-    const billObject = { Category: newCategory,Description: newDescription, number: newNumber};
+    const billObject = { Category: newCategory, Description: newDescription, number: newNumber};
     
     billsService
     .create(billObject)
@@ -80,7 +80,7 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
 
-      <h2>Bills</h2>
+      <h3>My Bills:</h3>
 
       <Bills bills={bills}/>
 
