@@ -1,3 +1,9 @@
+body {
+  /*
+  background-color: #343541;
+  color: #E0E0E0; /* Texto en un gris claro para mejor legibilidad 
+  */
+}
 
 .notification {
   color: green;

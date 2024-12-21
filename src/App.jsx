@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-// import Persons from './components/Persons';
-// import Filter from './components/Filter';
+
 import Bills from './components/Bills';
 import BillForm from './components/BillForm';  //el viejo 'PersonForm'
 import billsService from './services/bills-service';
@@ -15,12 +14,6 @@ const App = () => {
   const [newDescription, setNewDescription] = useState(''); // el viejo 'newName.setNewName'
   const [newNumber, setNewNumber] = useState('');
 
-  /*
-  const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState('put a new name...');
-  */
-  
-  // const [newFilter, setNewFilter] = useState('');
   const [message, setMessage] = useState(null);
   const [typeMessage, setTypeMessage] = useState();
 
@@ -34,7 +27,7 @@ const App = () => {
 
   const addBill = (event) => {
     event.preventDefault()
-    const billObject = { Category: newCategory, Description: newDescription, number: newNumber};
+    const billObject = { Category: newCategory, Description: newDescription, number: newNumber };
     
     billsService
     .create(billObject)
@@ -50,7 +43,6 @@ const App = () => {
       })
   }
   
-
   const handleCategoryChange = (event) => {
     setNewCategory(event.target.value);
   }
@@ -63,11 +55,10 @@ const App = () => {
     setNewNumber(event.target.value);
   }
 
-
   return (
     <div>
 
-      <h2>My Money Stats WebApp</h2>
+      <h2>My Money Stats - WebApp</h2>
       <Notification message={message} messageType={typeMessage}/>
             
       <BillForm 
