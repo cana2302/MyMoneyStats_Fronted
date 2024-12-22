@@ -7,9 +7,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://part3-notes-c8jm.onrender.com/',
+        target: 'https://mymoneystats-backend.onrender.com/',
         changeOrigin: true,
       },
     }
   },
-})
+});
