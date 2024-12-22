@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Bills from './components/Bills';
-import BillForm from './components/BillForm';  //el viejo 'PersonForm'
+import BillForm from './components/BillForm';
 import billsService from './services/bills-service';
 import Notification from './components/Notification';
 
@@ -9,9 +9,9 @@ import Notification from './components/Notification';
 const App = () => {
 
   // Hooks:
-  const [bills, setBills] = useState([]); // el viejo 'persons-setPersons'
-  const [newCategory, setNewCategory] = useState(''); // el viejo 'newName.setNewName'
-  const [newDescription, setNewDescription] = useState(''); // el viejo 'newName.setNewName'
+  const [bills, setBills] = useState([]); 
+  const [newCategory, setNewCategory] = useState(''); 
+  const [newDescription, setNewDescription] = useState(''); 
   const [newNumber, setNewNumber] = useState('');
 
   const [message, setMessage] = useState(null);
@@ -23,11 +23,11 @@ const App = () => {
       .then(initialBills => {
         setBills(initialBills)
       })
-  }, [])
+  }, []);
 
   const addBill = (event) => {
     event.preventDefault()
-    const billObject = { Category: newCategory, Description: newDescription, number: newNumber };
+    const billObject = { category: newCategory, description: newDescription, number: newNumber };
     
     billsService
     .create(billObject)
@@ -41,19 +41,19 @@ const App = () => {
         setMessage(`Added '${newDescription}'`);
         setTimeout(() => {setMessage(null)}, 5000);
       })
-  }
+  };
   
   const handleCategoryChange = (event) => {
     setNewCategory(event.target.value);
-  }
+  };
  
   const handleDescriptionChange = (event) => {
     setNewDescription(event.target.value);
-  }
+  };
 
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value);
-  }
+  };
 
   return (
     <div>
@@ -77,6 +77,6 @@ const App = () => {
 
     </div>
   )
-}
+};
 
 export default App
