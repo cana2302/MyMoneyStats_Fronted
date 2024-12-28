@@ -39,7 +39,7 @@ const App = () => {
         
         setTypeMessage(true);
         setMessage(`Added '${newDescription}'`);
-        setTimeout(() => {setMessage(null)}, 5000);
+        setTimeout(() => {setMessage(null)}, 8000);
       })
   };
   
@@ -54,6 +54,19 @@ const App = () => {
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value);
   };
+
+  const handleDelete = (bill_id,bill_description) => {
+    if (window.confirm(`Delete ${bill_description}?`)) {
+      billsService._delete(bill_id)
+        .then(() => {
+          setTypeMessage(true);
+          setMessage(`Deleted '${bill_description}' from stats`);
+          setTimeout(() => {setMessage(null)}, 8000);
+
+          setBills(bills.filter(bill => bill.id !== bill_id));
+        })
+    }
+  }
 
   return (
     <div>
@@ -73,7 +86,7 @@ const App = () => {
 
       <h3>My Bills:</h3>
 
-      <Bills bills={bills}/>
+      <Bills bills={bills} handleDelete={handleDelete}/>
 
     </div>
   )
