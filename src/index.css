@@ -1,8 +1,9 @@
 body {
-  /*
-  background-color: #343541;
-  color: #E0E0E0; /* Texto en un gris claro para mejor legibilidad 
-  */
+  background-color: #2F3544;
+  color: #E0E0E0;
+  display: flex;               /* Activa el modelo Flexbox */
+  justify-content: center;      /* Centra horizontalmente */
+  align-items: center;  
 }
 
 .notification {
@@ -23,3 +24,9 @@ body {
   margin-bottom: 10px;
 }
 
+  /*
+body {
+  background-color: #343541; 
+  color: #E0E0E0; /* Texto en un gris claro para mejor legibilidad 
+}
+  */
