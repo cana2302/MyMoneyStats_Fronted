@@ -68,6 +68,8 @@ const App = () => {
     }
   }
 
+  const currentDate = new Date().toDateString();
+
   return (
     <div>
 
@@ -84,9 +86,9 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
 
-      <h3>My Bills:</h3>
-
       <Bills bills={bills} handleDelete={handleDelete}/>
+
+      <p>{currentDate}</p>
 
     </div>
   )
