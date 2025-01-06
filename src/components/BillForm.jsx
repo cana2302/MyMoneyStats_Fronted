@@ -24,7 +24,7 @@ const BillForm = (props) => {
         <div className="form_number">
           <span>Number:</span>
           <span>
-            <input type="number" min="1" step="any" max="20" value={props.newNumber} onChange={props.handleNumberChange} />
+            <input type="number" min="1" step="any" value={props.newNumber} onChange={props.handleNumberChange} />
           </span>        
         </div>        
         <div className="form_button">
