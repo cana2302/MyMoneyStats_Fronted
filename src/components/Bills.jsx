@@ -26,7 +26,7 @@ const Bills = (props) => {
                 <span>{bill.date}</span>
                 <span>{bill.category}</span>
                 <span>{bill.description}</span>
-                <span>{bill.number}</span>
+                <span>{bill.number}&nbsp;€</span>
                 <button onClick={() => props.handleDelete(bill.id,bill.description)}>Delete</button>
               </div>
             </li>

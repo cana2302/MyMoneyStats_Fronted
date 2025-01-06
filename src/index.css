@@ -89,7 +89,7 @@ body {
 
 .bill-header {
   display: grid;
-  grid-template-columns: 1fr 1.3fr 1.3fr 1fr 1fr; /* Las mismas columnas que para las filas de datos */
+  grid-template-columns: 0.9fr 1.3fr 1.3fr 0.8fr 0.5fr; /* Las mismas columnas que para las filas de datos */
   gap: 10px; /* Espacio entre columnas */
   font-weight: bold; /* Negrita para el encabezado */
   padding-bottom: 10px; /* Espacio debajo del encabezado */
@@ -107,7 +107,7 @@ body {
 
 .bill-row {
   display: grid;
-  grid-template-columns: 1fr 1.3fr 1.3fr 1fr 1fr; /* Ajusta el ancho de las columnas según prefieras */
+  grid-template-columns: 0.9fr 1.3fr 1.3fr 0.6fr 0.5fr; /* Ajusta el ancho de las columnas según prefieras */
   gap: 10px; /* Espacio entre columnas */
   align-items: center;
 }
