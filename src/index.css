@@ -6,10 +6,6 @@ body {
   align-items: center;  
 }
 
-h2 {
-  justify-content: center;      /* Centra horizontalmente */
-}
-
 .notification {
   color: green;
   font-size: 20px;
