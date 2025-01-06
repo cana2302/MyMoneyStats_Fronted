@@ -24,6 +24,64 @@ body {
   margin-bottom: 10px;
 }
 
+/* Bills Component  ---START */
+.bill-border {
+  border: 1px solid #ccc; /* Borde sólido */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 15px; /* Añade espacio interno */
+  margin-top: 15px; /* Añade espacio superior */
+}
+
+.bill-header {
+  display: grid;
+  grid-template-columns: 1.3fr 1.3fr 1fr 1fr; /* Las mismas columnas que para las filas de datos */
+  gap: 10px; /* Espacio entre columnas */
+  font-weight: bold; /* Negrita para el encabezado */
+  padding-bottom: 10px; /* Espacio debajo del encabezado */
+  border-bottom: 2px solid #ccc; /* Línea separadora opcional */
+}
+
+.bills-list {
+  list-style: none;
+  padding: 0;
+}
+
+.bill-item {
+  margin-bottom: 10px;
+}
+
+.bill-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1.3fr 1fr 1fr; /* Ajusta el ancho de las columnas según prefieras */
+  gap: 10px; /* Espacio entre columnas */
+  align-items: center;
+}
+
+.bill-row span {
+  padding: 5px 0;
+}
+
+.bill-row button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.bill-row span:nth-child(3) {
+  text-align: right; /* Posiciona el numero de la comuna amount hacia la derecha */
+  margin-right: 33px; /* Doble espacio de separación entre 'Amount' y 'Actions' */
+}
+
+.bill-header span:nth-child(3) {
+  text-align: right; /* Posiciona el texto del encabezado amount al centro */
+  margin-right: 33px; /* Doble espacio de separación entre 'Amount' y 'Actions' */
+}
+
+.bill-header span:nth-child(4) {
+  text-align: center; /* Posiciona el texto del encabezado action al centro */
+}
+/* Bills Component  ---END */
+
+
   /*
 body {
   background-color: #343541; 
