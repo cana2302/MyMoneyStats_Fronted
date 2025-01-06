@@ -12,6 +12,7 @@ const Bills = (props) => {
       <div className="bill-border">
 
         <div className="bill-header">
+          <span>Date</span>
           <span>Category</span>
           <span>Description</span>
           <span>Amount</span>
@@ -22,6 +23,7 @@ const Bills = (props) => {
           {props.bills.map(bill =>
             <li key={bill.id} className="bill-item"> 
               <div className="bill-row">
+                <span>{bill.date}</span>
                 <span>{bill.category}</span>
                 <span>{bill.description}</span>
                 <span>{bill.number}</span>

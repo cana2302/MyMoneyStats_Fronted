@@ -3,6 +3,12 @@ const BillForm = (props) => {
     <>
       <form onSubmit={props.addBill} className="billForm">
         <h3>Add a new bill:</h3>
+        <div className="form_date">
+          <span>Date:</span>
+          <span>
+            <input type="date" value={props.newDate} onChange={props.handleDateChange} />
+          </span>        
+        </div>
         <div className="form_category">
           <span>Category:</span>
           <span>

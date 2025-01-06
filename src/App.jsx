@@ -10,6 +10,7 @@ const App = () => {
 
   // Hooks:
   const [bills, setBills] = useState([]); 
+  const [newDate, setNewDate] = useState('');
   const [newCategory, setNewCategory] = useState(''); 
   const [newDescription, setNewDescription] = useState(''); 
   const [newNumber, setNewNumber] = useState('');
@@ -27,12 +28,13 @@ const App = () => {
 
   const addBill = (event) => {
     event.preventDefault()
-    const billObject = { category: newCategory, description: newDescription, number: newNumber };
+    const billObject = { date: newDate, category: newCategory, description: newDescription, number: newNumber };
     
     billsService
     .create(billObject)
       .then(returnedBill => {
         setBills([...bills,returnedBill]);
+        setNewDate('');
         setNewCategory('');
         setNewDescription('');
         setNewNumber('');
@@ -41,6 +43,10 @@ const App = () => {
         setMessage(`Added '${newDescription}'`);
         setTimeout(() => {setMessage(null)}, 8000);
       })
+  };
+
+  const handleDateChange = (event) => {
+    setNewDate(event.target.value);
   };
   
   const handleCategoryChange = (event) => {
@@ -77,7 +83,9 @@ const App = () => {
       <Notification message={message} messageType={typeMessage}/>
             
       <BillForm 
-        addBill={addBill} 
+        addBill={addBill}
+        newDate={newDate}
+        handleDateChange={handleDateChange} 
         newCategory={newCategory} 
         handleCategoryChange={handleCategoryChange} 
         newDescription = {newDescription}
