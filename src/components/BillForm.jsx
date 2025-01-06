@@ -1,22 +1,28 @@
 const BillForm = (props) => {
   return (
     <>
-      <form onSubmit={props.addBill}>
+      <form onSubmit={props.addBill} className="billForm">
         <h3>Add a new bill:</h3>
-        <div>
-          Category: 
-          <input value={props.newCategory} onChange={props.handleCategoryChange} />
+        <div className="form_category">
+          <span>Category:</span>
+          <span>
+            <input value={props.newCategory} onChange={props.handleCategoryChange} />
+          </span>        
         </div>
-        <div>
-          Description: 
-          <input value={props.newDescription} onChange={props.handleDescriptioChange} />
+        <div className="form_description">
+          <span>Description:</span>
+          <span>
+            <input value={props.newDescription} onChange={props.handleDescriptioChange} />
+          </span>  
         </div>
-        <div>
-          Number: 
-          <input value={props.newNumber} onChange={props.handleNumberChange} />
+        <div className="form_number">
+          <span>Number:</span>
+          <span>
+            <input value={props.newNumber} onChange={props.handleNumberChange} />
+          </span>        
         </div>        
-        <div>
-          <button type="submit">Add</button>
+        <div className="form_button">
+            <button type="submit">Add</button>
         </div>
       </form>
     </>

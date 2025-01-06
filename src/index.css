@@ -6,11 +6,15 @@ body {
   align-items: center;  
 }
 
+h2 {
+  justify-content: center;      /* Centra horizontalmente */
+}
+
 .notification {
   color: green;
   font-size: 20px;
   border-style: solid;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -19,10 +23,63 @@ body {
   color: red;
   font-size: 20px;
   border-style: solid;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
 }
+
+/* BillForm Component  ---START */
+
+.billForm {
+  border: 1px solid #ccc; /* Borde sólido */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 15px; /* Añade espacio interno */
+  margin-top: 15px; /* Añade espacio superior */
+  display: flex;
+  flex-direction: column; /* Coloca los elementos en una columna */
+  /*align-items: center; /* Centra los elementos dentro del formulario */
+}
+
+.billForm h3 {
+  margin-top: 2px; /* Reduce el espacio superior */
+  margin-bottom: 8px; /* Reduce el espacio inferior */
+  justify-content: left; /* Centra el div dentro del contenedor */
+}
+
+.form_category, 
+.form_description, 
+.form_number, 
+.form_button {
+  display: grid;
+  grid-template-columns: 1fr 2.3fr; /* Ajusta el ancho de las columnas */
+  align-items: center;
+  width: 80%; /* Todos los divs ocupan el 80% del formulario */
+  margin: 0 auto; /* Centra el div en el formulario */
+  margin-bottom: 10px;
+}
+
+.form_category input, 
+.form_description input, 
+.form_number input {
+  width: 100%; /* Los inputs ocupan todo el ancho disponible */
+  border: 1px solid #ccc; /* Borde de los inputs */
+  border-radius: 5px; /* Esquinas redondeadas */
+}
+
+.form_button {
+  display: flex;
+  justify-content: center; /* Centra el botón dentro del contenedor */
+  margin-top: 10px;
+}
+
+.form_button button {
+  width: 100%; /* El botón ocupa todo el ancho del div .form_button */
+  padding: 8px; /* Espacio interno del botón */
+  cursor: pointer;
+  border-radius: 10px; /* Esquinas redondeadas */
+}
+/* BillForm Component  ---END */
+
 
 /* Bills Component  ---START */
 .bill-border {
@@ -64,6 +121,7 @@ body {
 .bill-row button {
   padding: 5px 10px;
   cursor: pointer;
+  border-radius: 10px; /* Esquinas redondeadas */
 }
 
 .bill-row span:nth-child(3) {

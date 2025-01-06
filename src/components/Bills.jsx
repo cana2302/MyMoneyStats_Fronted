@@ -15,7 +15,7 @@ const Bills = (props) => {
           <span>Category</span>
           <span>Description</span>
           <span>Amount</span>
-          <span>Actions</span>
+          <span></span>
         </div>
 
         <ul className="bills-list">
@@ -30,7 +30,7 @@ const Bills = (props) => {
             </li>
           )}
         </ul>
-        
+
       </div>
     </>
   )
