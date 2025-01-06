@@ -1,12 +1,12 @@
 const Bills = (props) => {
-
+  
   var total = props.bills.reduce(function(sum, bill) {
-    return sum + parseInt(bill.number)
-  },0)
+    return sum + parseFloat(bill.number.toString()); // Convertir a número
+  }, 0);
 
   return (
     <>
-      <h3>Total is: € <b>{total}</b>.-</h3>
+      <h3>Total is: € <b>{total.toFixed(2)}</b>.-</h3>
       <h4>My Bills:</h4>
 
       <div className="bill-border">
