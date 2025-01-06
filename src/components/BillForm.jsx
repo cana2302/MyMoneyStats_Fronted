@@ -6,19 +6,19 @@ const BillForm = (props) => {
         <div className="form_category">
           <span>Category:</span>
           <span>
-            <input value={props.newCategory} onChange={props.handleCategoryChange} />
+            <input type="text" maxLength="20" value={props.newCategory} onChange={props.handleCategoryChange} />
           </span>        
         </div>
         <div className="form_description">
           <span>Description:</span>
           <span>
-            <input value={props.newDescription} onChange={props.handleDescriptioChange} />
+            <input type="text" maxLength="30" value={props.newDescription} onChange={props.handleDescriptioChange} />
           </span>  
         </div>
         <div className="form_number">
           <span>Number:</span>
           <span>
-            <input value={props.newNumber} onChange={props.handleNumberChange} />
+            <input type="number" min="1" step="any" max="20" value={props.newNumber} onChange={props.handleNumberChange} />
           </span>        
         </div>        
         <div className="form_button">
