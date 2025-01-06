@@ -44,7 +44,7 @@ body {
 
 .form_category, 
 .form_description, 
-.form_number, 
+.form_amount, 
 .form_button,
 .form_date {
   display: grid;
@@ -57,7 +57,7 @@ body {
 
 .form_category input, 
 .form_description input, 
-.form_number input,
+.form_amount input,
 .form_date input {
   width: 100%; /* Los inputs ocupan todo el ancho disponible */
   border: 1px solid #ccc; /* Borde de los inputs */

@@ -13,7 +13,7 @@ const App = () => {
   const [newDate, setNewDate] = useState('');
   const [newCategory, setNewCategory] = useState(''); 
   const [newDescription, setNewDescription] = useState(''); 
-  const [newNumber, setNewNumber] = useState('');
+  const [newAmount, setNewAmount] = useState('');
 
   const [message, setMessage] = useState(null);
   const [typeMessage, setTypeMessage] = useState();
@@ -28,7 +28,7 @@ const App = () => {
 
   const addBill = (event) => {
     event.preventDefault()
-    const billObject = { date: newDate, category: newCategory, description: newDescription, number: newNumber };
+    const billObject = { date: newDate, category: newCategory, description: newDescription, amount: newAmount };
     
     billsService
     .create(billObject)
@@ -37,7 +37,7 @@ const App = () => {
         setNewDate('');
         setNewCategory('');
         setNewDescription('');
-        setNewNumber('');
+        setNewAmount('');
         
         setTypeMessage(true);
         setMessage(`Added '${newDescription}'`);
@@ -57,8 +57,8 @@ const App = () => {
     setNewDescription(event.target.value);
   };
 
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value);
+  const handleAmountChange = (event) => {
+    setNewAmount(event.target.value);
   };
 
   const handleDelete = (bill_id,bill_description) => {
@@ -90,8 +90,8 @@ const App = () => {
         handleCategoryChange={handleCategoryChange} 
         newDescription = {newDescription}
         handleDescriptioChange={handleDescriptionChange}
-        newNumber={newNumber} 
-        handleNumberChange={handleNumberChange}
+        newNumber={newAmount} 
+        handleNumberChange={handleAmountChange}
       />
 
       <Bills bills={bills} handleDelete={handleDelete}/>

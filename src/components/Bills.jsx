@@ -1,7 +1,7 @@
 const Bills = (props) => {
   
   var total = props.bills.reduce(function(sum, bill) {
-    return sum + parseFloat(bill.number.toString()); // Convertir a número
+    return sum + parseFloat(bill.amount.toString()); // Convertir a número
   }, 0);
 
   return (
@@ -26,7 +26,7 @@ const Bills = (props) => {
                 <span>{bill.date}</span>
                 <span>{bill.category}</span>
                 <span>{bill.description}</span>
-                <span>{bill.number}&nbsp;€</span>
+                <span>{bill.amount}&nbsp;€</span>
                 <button onClick={() => props.handleDelete(bill.id,bill.description)}>Delete</button>
               </div>
             </li>
