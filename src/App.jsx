@@ -90,8 +90,8 @@ const App = () => {
         handleCategoryChange={handleCategoryChange} 
         newDescription = {newDescription}
         handleDescriptioChange={handleDescriptionChange}
-        newNumber={newAmount} 
-        handleNumberChange={handleAmountChange}
+        newAmount={newAmount} 
+        handleAmountChange={handleAmountChange}
       />
 
       <Bills bills={bills} handleDelete={handleDelete}/>
