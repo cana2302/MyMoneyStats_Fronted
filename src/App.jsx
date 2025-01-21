@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import Bills from './components/Bills';
 import BillForm from './components/BillForm';
 import billsService from './services/bills-service';
+import loginService from './services/login'
 import Notification from './components/Notification';
-
 
 const App = () => {
 
@@ -15,8 +15,14 @@ const App = () => {
   const [newDescription, setNewDescription] = useState(''); 
   const [newAmount, setNewAmount] = useState('');
 
+  const [username, setUsername] = useState('') 
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null) 
+
   const [message, setMessage] = useState(null);
   const [typeMessage, setTypeMessage] = useState();
+
+  
 
   useEffect(() => {
     billsService
@@ -44,6 +50,51 @@ const App = () => {
         setTimeout(() => {setMessage(null)}, 8000);
       })
   };
+
+  const loginForm = () => (
+    <form onSubmit={handleLogin}>
+        <div>
+          username
+            <input
+            type="text"
+            value={username}
+            name="Username"
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </div>
+        <div>
+          password
+            <input
+            type="password"
+            value={password}
+            name="Password"
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </div>
+        <button type="submit">login</button>
+      </form>
+  )
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    
+    try {
+      const user = await loginService.login({
+        username, password,
+      })
+      setUser(user)
+      setUsername('')
+      setPassword('')
+      
+      setTypeMessage(true);
+      setMessage(`Authorized`);
+      setTimeout(() => {setMessage(null)}, 8000);
+    } catch {
+      setTypeMessage(false);
+      setMessage(`Wrong credentials`);
+      setTimeout(() => {setMessage(null)}, 8000);
+    }
+  }
 
   const handleDateChange = (event) => {
     setNewDate(event.target.value);
@@ -81,7 +132,13 @@ const App = () => {
 
       <h2>My Money Stats - WebApp</h2>
       <Notification message={message} messageType={typeMessage}/>
-            
+
+      { user === null ? loginForm() : 
+        <div>
+          <p>{user.usernamename} logged-in</p>
+        </div>
+      }
+       
       <BillForm 
         addBill={addBill}
         newDate={newDate}
