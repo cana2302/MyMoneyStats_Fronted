@@ -2,8 +2,12 @@ import { useState, useEffect } from 'react';
 
 import Bills from './components/Bills';
 import BillForm from './components/BillForm';
+import LoginForm from './components/LoginForm';
+import Header from './components/Header';
 import billsService from './services/bills-service';
 import loginService from './services/login'
+import logoutService from './services/logout'
+import sessionService from './services/session';
 import Notification from './components/Notification';
 
 const App = () => {
@@ -22,7 +26,16 @@ const App = () => {
   const [message, setMessage] = useState(null);
   const [typeMessage, setTypeMessage] = useState();
 
-  
+  useEffect(() => {
+    sessionService
+      .getSession()
+      .then((response)=>{
+        setUser(response)  // Object { id: "678828c363011448e3384", username: "can222", role: "user" }
+      })
+      .catch(error => {
+        console.log('Error fetching session:', error);
+      });
+  }, []);
 
   useEffect(() => {
     billsService
@@ -51,41 +64,17 @@ const App = () => {
       })
   };
 
-  const loginForm = () => (
-    <form onSubmit={handleLogin}>
-        <div>
-          username
-            <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-          password
-            <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
-      </form>
-  )
-
   const handleLogin = async (event) => {
     event.preventDefault()
     
     try {
-      const user = await loginService.login({
-        username, password,
-      })
-      setUser(user)
+      const user = await loginService.login({ username, password })
+
+      billsService.setToken(user.token)
+      setUser(user.username)
       setUsername('')
       setPassword('')
-      
+
       setTypeMessage(true);
       setMessage(`Authorized`);
       setTimeout(() => {setMessage(null)}, 8000);
@@ -94,6 +83,12 @@ const App = () => {
       setMessage(`Wrong credentials`);
       setTimeout(() => {setMessage(null)}, 8000);
     }
+  }
+
+  const handleLogout = async (event) => {
+    event.preventDefault()
+    await logoutService.logout()
+    setUser(null)
   }
 
   const handleDateChange = (event) => {
@@ -133,10 +128,16 @@ const App = () => {
       <h2>My Money Stats - WebApp</h2>
       <Notification message={message} messageType={typeMessage}/>
 
-      { user === null ? loginForm() : 
-        <div>
-          <p>{user.usernamename} logged-in</p>
-        </div>
+      { user === null ? 
+        <LoginForm 
+          handleLogin={handleLogin} 
+          username={username} 
+          setUsername={setUsername} 
+          password={password} 
+          setPassword={setPassword}/> : 
+        <Header 
+          handleLogout={handleLogout} 
+          username={user.username}/>
       }
        
       <BillForm 
