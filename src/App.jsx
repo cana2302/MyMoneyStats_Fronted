@@ -29,14 +29,12 @@ const App = () => {
   useEffect(() => {
     sessionService
       .getSession()
-      .then((response)=>{
-        setUser(response)  // Object { id: "678828c363011448e3384", username: "can222", role: "user" }
-      })
+      .then((user)=>{setUser(user)})  // Object { id: "678828c363011448e3384", username: "can222", role: "user" }
       .catch(error => {
         console.log('Error fetching session:', error);
       });
   }, []);
-
+/*
   useEffect(() => {
     billsService
       .getAll()
@@ -44,7 +42,7 @@ const App = () => {
         setBills(initialBills)
       })
   }, []);
-
+*/
   const addBill = (event) => {
     event.preventDefault()
     const billObject = { date: newDate, category: newCategory, description: newDescription, amount: newAmount };
@@ -139,21 +137,23 @@ const App = () => {
           handleLogout={handleLogout} 
           username={user.username}/>
       }
-       
-      <BillForm 
-        addBill={addBill}
-        newDate={newDate}
-        handleDateChange={handleDateChange} 
-        newCategory={newCategory} 
-        handleCategoryChange={handleCategoryChange} 
-        newDescription = {newDescription}
-        handleDescriptioChange={handleDescriptionChange}
-        newAmount={newAmount} 
-        handleAmountChange={handleAmountChange}
-      />
 
-      <Bills bills={bills} handleDelete={handleDelete}/>
-
+      { user === null ? null :
+        <BillForm 
+          addBill={addBill}
+          newDate={newDate}
+          handleDateChange={handleDateChange} 
+          newCategory={newCategory} 
+          handleCategoryChange={handleCategoryChange} 
+          newDescription = {newDescription}
+          handleDescriptioChange={handleDescriptionChange}
+          newAmount={newAmount} 
+          handleAmountChange={handleAmountChange}
+        />}
+      
+      { user === null ? null :
+        <Bills bills={bills} handleDelete={handleDelete}/>
+      }
       <p>{currentDate}</p>
 
     </div>
