@@ -169,10 +169,8 @@ const App = () => {
           newAmount={newAmount} 
           handleAmountChange={handleAmountChange}
         />}
-      
-      { user === null ? null :
-        <Bills bills={bills} handleDelete={handleDelete}/>
-      }
+
+      { user === null ? null :<Bills bills={bills} handleDelete={handleDelete}/>}
       { user === null ? <p>{currentDateString}</p> : null }
       <br/><br/>
       <p>____________________________</p>

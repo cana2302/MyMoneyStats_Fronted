@@ -7,7 +7,7 @@ const LoginForm = (props) => {
       <div className="form_date">
         <span>Username:</span>
         <span>
-          <input type="text" value={props.username} name="Username" onChange={({ target }) => props.setUsername(target.value)} />
+          <input type="text" value={props.username} name="Username" onChange={({ target }) => props.setUsername(target.value.toLowerCase())} />
         </span>   
       </div>
       <div className="form_date">
@@ -17,7 +17,7 @@ const LoginForm = (props) => {
         </span>
       </div>
       <div className="form_button">
-        <button type="submit">Sing in</button>
+        <button type="submit">Sign in</button>
       </div>
     </form>
   )
