@@ -9,6 +9,7 @@ import loginService from './services/login'
 import logoutService from './services/logout'
 import sessionService from './services/session';
 import Notification from './components/Notification';
+import LoadingDots from './components/Loading';
 
 const App = () => {
 
@@ -23,6 +24,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null) 
 
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const [typeMessage, setTypeMessage] = useState();
 
@@ -34,15 +36,24 @@ const App = () => {
         console.log('Error fetching session:', error);
       });
   }, []);
-/*
+
   useEffect(() => {
-    billsService
-      .getAll()
-      .then(initialBills => {
-        setBills(initialBills)
-      })
-  }, []);
-*/
+    if (user) {
+      setIsLoading(true);
+      billsService
+        .getAll()
+        .then(initialBills => {
+          setBills(initialBills)
+          setIsLoading(false)
+        })
+        .catch(error => {
+          console.error('Error fetching, no token:', error);
+        });
+    } else {
+      setBills([])
+    }
+  }, [user]);
+
   const addBill = (event) => {
     event.preventDefault()
     const billObject = { date: newDate, category: newCategory, description: newDescription, amount: newAmount };
@@ -67,9 +78,8 @@ const App = () => {
     
     try {
       const user = await loginService.login({ username, password })
-
-      billsService.setToken(user.token)
-      setUser(user.username)
+      
+      setUser(user)
       setUsername('')
       setPassword('')
 
@@ -132,11 +142,16 @@ const App = () => {
           username={username} 
           setUsername={setUsername} 
           password={password} 
-          setPassword={setPassword}/> : 
+          setPassword={setPassword}/> : null  
+      }
+
+      { user !== null ? 
         <Header 
           handleLogout={handleLogout} 
-          username={user.username}/>
+          user={user}/>: null
       }
+
+      <LoadingDots isLoading={isLoading} />
 
       { user === null ? null :
         <BillForm 
