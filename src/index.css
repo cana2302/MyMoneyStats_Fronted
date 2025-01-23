@@ -6,6 +6,21 @@ body {
   align-items: center;  
 }
 
+.app h2 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.app p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#email {
+  font-size: 10px;
+}
+
 .notification {
   color: green;
   font-size: 20px;
@@ -144,3 +159,90 @@ body {
   color: #E0E0E0; /* Texto en un gris claro para mejor legibilidad 
 }
   */
+
+.loginForm {
+  border: 1px solid #ccc; /* Borde sólido */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 15px; /* Añade espacio interno */
+  margin-bottom: 30px;
+  margin-top: 30px; /* Añade espacio superior */
+  display: flex;
+  flex-direction: column; /* Coloca los elementos en una columna */
+  /*align-items: center; /* Centra los elementos dentro del formulario */
+}
+
+.loginForm h3 {
+  margin-top: 8px; /* Reduce el espacio superior */
+  margin-bottom: 25px; /* Reduce el espacio inferior */
+  justify-content: center; /* Centra el div dentro del contenedor */
+  text-align: center; /* Añade esta línea para centrar el texto */
+  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
+}
+
+.loginForm button {
+  margin-top: 16px; /* Reduce el espacio superior */
+  margin-bottom: 12px; /* Reduce el espacio inferior */
+  justify-content: center; /* Centra el div dentro del contenedor */
+  text-align: center; /* Añade esta línea para centrar el texto */
+  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
+  font-weight: bold;
+}
+
+.headerForm {
+  border: 1px solid #ccc; /* Borde sólido */
+  border-radius: 10px; /* Esquinas redondeadas */
+  /*margin-top: 10px;*/
+  margin-bottom: 30px; 
+  display: flex;
+  flex-direction: row; /* Coloca los elementos en una columna */
+  /*align-items: center; /* Centra los elementos dentro del formulario */
+}
+
+.headerForm h3 {
+  justify-content: center; /* Centra el div dentro del contenedor */
+  text-align: center; /* Añade esta línea para centrar el texto */
+  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
+}
+
+/*
+.headerForm button {
+  justify-content: left; 
+  text-align: center; 
+  width: 20%; 
+  font-weight: bold;
+}*/
+
+.form_button_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+}
+
+.form_button_header button {
+  font-weight: bold;
+  width: 100%; /* El botón ocupa todo el ancho del div .form_button */
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 10px
+}
+
+.user_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: right;
+  width: 35%;
+}
+
+.user_div p {
+  margin-left: 10px;
+}
+
+.date_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  width: 30%;
+}

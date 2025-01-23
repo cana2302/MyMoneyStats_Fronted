@@ -2,7 +2,7 @@ const BillForm = (props) => {
   return (
     <>
       <form onSubmit={props.addBill} className="billForm">
-        <h3>Add a new bill:</h3>
+        <h3>Add a new bill</h3>
         <div className="form_date">
           <span>Date:</span>
           <span>

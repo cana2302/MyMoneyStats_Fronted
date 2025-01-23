@@ -13,9 +13,13 @@ import LoadingDots from './components/Loading';
 
 const App = () => {
 
+  const currentDate = new Date();
+  const currentDateString = currentDate.toDateString();
+  const formattedDate = currentDate.toISOString().split('T')[0]; // Esto te da la fecha en formato yyyy-MM-dd
+
   // Hooks:
   const [bills, setBills] = useState([]); 
-  const [newDate, setNewDate] = useState('');
+  const [newDate, setNewDate] = useState(formattedDate);
   const [newCategory, setNewCategory] = useState(''); 
   const [newDescription, setNewDescription] = useState(''); 
   const [newAmount, setNewAmount] = useState('');
@@ -128,10 +132,8 @@ const App = () => {
     }
   }
 
-  const currentDate = new Date().toDateString();
-
   return (
-    <div>
+    <div className="app">
 
       <h2>My Money Stats - WebApp</h2>
       <Notification message={message} messageType={typeMessage}/>
@@ -148,7 +150,9 @@ const App = () => {
       { user !== null ? 
         <Header 
           handleLogout={handleLogout} 
-          user={user}/>: null
+          user={user}
+          currentDate={currentDateString}/>: null
+          
       }
 
       <LoadingDots isLoading={isLoading} />
@@ -169,7 +173,10 @@ const App = () => {
       { user === null ? null :
         <Bills bills={bills} handleDelete={handleDelete}/>
       }
-      <p>{currentDate}</p>
+      { user === null ? <p>{currentDateString}</p> : null }
+      <br/><br/>
+      <p>____________________________</p>
+      <p id='email'>developer contact: fcanavese@protonmail.com</p>
 
     </div>
   )

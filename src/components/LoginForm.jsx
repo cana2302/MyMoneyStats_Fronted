@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 
 const LoginForm = (props) => {
   return (
-    <form onSubmit={props.handleLogin} className="billForm">
-      <h3>Login:</h3>
+    <form onSubmit={props.handleLogin} className="loginForm">
+      <h3>Login</h3>
       <div className="form_date">
         <span>Username:</span>
         <span>
