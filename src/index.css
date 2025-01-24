@@ -188,6 +188,44 @@ body {
   font-weight: bold;
 }
 
+.backButton {
+  margin-top: 16px; /* Reduce el espacio superior */
+  margin-bottom: 12px; /* Reduce el espacio inferior */
+  justify-content: center; /* Centra el div dentro del contenedor */
+  text-align: center; /* Añade esta línea para centrar el texto */
+  width: 50%; /* Asegura que el h3 ocupe todo el ancho disponible */
+  font-weight: bold;
+  border-radius: 10px;  
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 25%;
+}
+
+.registerForm {
+  border: 1px solid #ccc; /* Borde sólido */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 15px; /* Añade espacio interno */
+  margin-bottom: 30px;
+  margin-top: 40px; /* Añade espacio superior */
+  display: flex;
+  flex-direction: column; /* Coloca los elementos en una columna */
+  /*align-items: center; /* Centra los elementos dentro del formulario */
+}
+
+.registerForm h4 {
+  margin-top: 8px; /* Reduce el espacio superior */
+  justify-content: center; /* Centra el div dentro del contenedor */
+  text-align: center; /* Añade esta línea para centrar el texto */
+  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
+}
+
+.registerForm button {
+  justify-content: center; /* Centra el div dentro del contenedor */
+  text-align: center; /* Añade esta línea para centrar el texto */
+  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
+  font-weight: bold;
+}
+
 .headerForm {
   border: 1px solid #ccc; /* Borde sólido */
   border-radius: 10px; /* Esquinas redondeadas */

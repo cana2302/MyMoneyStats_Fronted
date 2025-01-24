@@ -4,12 +4,16 @@ import Bills from './components/Bills';
 import BillForm from './components/BillForm';
 import LoginForm from './components/LoginForm';
 import Header from './components/Header';
+import RegisterForm from './components/RegisterForm';
+import CreateUserForm from './components/CreateUser';
+import Notification from './components/Notification';
+import LoadingDots from './components/Loading';
+
 import billsService from './services/bills-service';
 import loginService from './services/login'
 import logoutService from './services/logout'
 import sessionService from './services/session';
-import Notification from './components/Notification';
-import LoadingDots from './components/Loading';
+import userService from './services/user'
 
 const App = () => {
 
@@ -27,6 +31,8 @@ const App = () => {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null) 
+  const [password1, setPassword1] = useState('')
+  const [register, setRegister] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState(null);
@@ -97,6 +103,43 @@ const App = () => {
     }
   }
 
+  const handleRegister = (event) => {
+    event.preventDefault()
+    setRegister(true)
+    console.log('register')
+  }
+
+  const handleCreateUser = async (event) => {
+    event.preventDefault()
+
+    try {
+      const user = await userService.createUser({ username, password })
+    
+      setUser(user)
+      setUsername('')
+      setPassword('')
+
+      setTypeMessage(true);
+      setMessage(`Created user`);
+      setTimeout(() => {setMessage(null)}, 6000);
+    } catch {
+      setTypeMessage(false);
+      setMessage(`Wrong credentials`);
+      setTimeout(() => {setMessage(null)}, 8000);
+    }
+
+    try {
+      const user = await loginService.login({ username, password })
+      setUser(user)
+      setUsername('')
+      setPassword('')
+    } catch {
+      setTypeMessage(false);
+      setMessage(`Wrong credentials`);
+      setTimeout(() => {setMessage(null)}, 8000);
+    }
+  }
+
   const handleLogout = async (event) => {
     event.preventDefault()
     await logoutService.logout()
@@ -132,27 +175,50 @@ const App = () => {
     }
   }
 
+  const handleBack = () => {
+    setRegister(false)
+    setUsername('')
+    setPassword('')
+    setPassword1('')
+  }
+
   return (
     <div className="app">
 
       <h2>My Money Stats - WebApp</h2>
       <Notification message={message} messageType={typeMessage}/>
 
-      { user === null ? 
+      { user === null && register === false ? 
         <LoginForm 
           handleLogin={handleLogin} 
           username={username} 
           setUsername={setUsername} 
           password={password} 
-          setPassword={setPassword}/> : null  
+          setPassword={setPassword}
+          handleRegister={handleRegister} /> : null  
       }
+
+      { user === null && register === false ? 
+        <RegisterForm handleRegister={handleRegister} /> : null }
+
+      { register && user === null ? 
+        <CreateUserForm
+          handleCreateUser={handleCreateUser}
+          username={username} 
+          setUsername={setUsername} 
+          password={password} 
+          setPassword={setPassword}
+          password1={password1}
+          setPassword1={setPassword1}
+        /> : null }
+
+      { register ? <button onClick={handleBack} className='backButton'>Back</button> : null }
 
       { user !== null ? 
         <Header 
           handleLogout={handleLogout} 
           user={user}
-          currentDate={currentDateString}/>: null
-          
+          currentDate={currentDateString}/>: null   
       }
 
       <LoadingDots isLoading={isLoading} />

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-const LoginForm = (props) => {
+const CreateUserForm = (props) => {
   return (
-      <form onSubmit={props.handleLogin} className="loginForm">
-        <h3>Login</h3>
-        <div className="form_date">
+    <form onSubmit={props.handleCreateUser} className="loginForm">
+      <h3>New User</h3>
+      <div className="form_date">
         <span>Username:</span>
         <span>
           <input type="text" value={props.username} name="Username" onChange={({ target }) => props.setUsername(target.value.toLowerCase())} />
@@ -16,11 +16,17 @@ const LoginForm = (props) => {
           <input type="password" value={props.password} name="Password" onChange={({ target }) => props.setPassword(target.value)} />
         </span>
       </div>
+      <div className="form_date">
+        <span>Repeat password:</span>
+        <span>
+          <input type="password" value={props.password1} name="Password1" onChange={({ target }) => props.setPassword1(target.value)} />
+        </span>
+      </div>
       <div className="form_button">
-        <button type="submit">Sign in</button>
-        </div>
-      </form>
+        <button type="submit">Register</button>
+      </div>
+    </form>
   )
 }
 
-export default LoginForm
+export default CreateUserForm
