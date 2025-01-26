@@ -35,6 +35,7 @@ const App = () => {
   const [password1, setPassword1] = useState('')
   const [code, setCode] = useState('')
   const [register, setRegister] = useState(false)
+  const [show, setShow] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState(null);
@@ -44,13 +45,13 @@ const App = () => {
     sessionService
       .getSession()
       .then((user)=>{setUser(user)})  // Object { id: "678828c363011448e3384", username: "can222", role: "user" }
-      .catch(error => {
-        console.log('Error fetching session:', error);
+      .catch(() => {
+        console.log('No sesion')
       });
   }, []);
 
   useEffect(() => {
-    if (user) {
+    if (user !== null) {
       setIsLoading(true);
       billsService
         .getAll()
@@ -58,8 +59,8 @@ const App = () => {
           setBills(initialBills)
           setIsLoading(false)
         })
-        .catch(error => {
-          console.error('Error fetching, no token:', error);
+        .catch(() => {
+          console.log('No sesion')
         });
     } else {
       setBills([])
@@ -94,6 +95,7 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      setShow(false)
 
       setTypeMessage(true);
       setMessage(`Authorized`);
@@ -108,7 +110,6 @@ const App = () => {
   const handleRegister = (event) => {
     event.preventDefault()
     setRegister(true)
-    console.log('register')
   }
 
   const handleCreateUser = async (event) => {
@@ -121,32 +122,51 @@ const App = () => {
         setUser(user)
         setEmail('')
         setRegister(false)
+        setShow(true)
   
         setTypeMessage(true);
         setMessage(`Created user`);
         setTimeout(() => {setMessage(null)}, 5000);
-      } catch {
-        setTypeMessage(false);
-        setMessage(`Wrong credentials`);
-        setTimeout(() => {setMessage(null)}, 5000);
+      } catch (error) {
+        if (error.response && error.response.status) {
+          switch (error.response.status) {
+            case 409:
+              setMessage('username already exist. Choose anothe');
+              break;
+            case 400:
+              setMessage('wrong authorization code');
+              break;
+            default:
+              setMessage('Something happen. Please try again');
+              break;
+          }
+        } else {
+          setMessage('Something happen. Please try again');
+        }
+        setTypeMessage(false); 
+        setTimeout(() => { setMessage(null); }, 6000);
       }
-      try {
-        const user = await loginService.login({ username, password })
-        setUser(user)
-        setUsername('')
-        setPassword('')
-        setCode('')
-      } catch {
-        setTypeMessage(false);
-        setMessage(`Wrong credentials`);
-        setTimeout(() => {setMessage(null)}, 5000);
-      }
+      /*
+      if (message === 'Created user') {
+
+        try {
+          const user = await loginService.login({ username, password })
+          setUser(user)
+          setUsername('')
+          setPassword('')
+          setCode('')
+        } catch {
+          setTypeMessage(false);
+          setMessage(`Wrong credentials`);
+          setTimeout(() => {setMessage(null)}, 5000);
+        }
+      }*/
+
     } else if (password !== password1) {
       setTypeMessage(false);
       setMessage(`The password must be the same`);
       setTimeout(() => {setMessage(null)}, 5000);
     }
-
   }
 
   const handleLogout = async (event) => {
@@ -200,7 +220,7 @@ const App = () => {
       <h2>My Money Stats - WebApp</h2>
       <Notification message={message} messageType={typeMessage}/>
 
-      { user === null && register === false ? 
+      { user === null && register === false || show === true ? 
         <LoginForm 
           handleLogin={handleLogin} 
           username={username} 
@@ -230,16 +250,14 @@ const App = () => {
 
       { register && user === null ? <button onClick={handleBack} className='backButton'>Back</button> : null }
 
-      { user !== null ? 
+      { user !== null && show === false ? 
         <Header 
           handleLogout={handleLogout} 
           user={user}
           currentDate={currentDateString}/>: null   
       }
 
-      { user !== null ? < LoadingDots isLoading={isLoading}/>  : null }
-
-      { user === null ? null :
+      { user === null || show === true ? null :
         <BillForm 
           addBill={addBill}
           newDate={newDate}
@@ -252,7 +270,9 @@ const App = () => {
           handleAmountChange={handleAmountChange}
         />}
 
-      { user === null ? null :<Bills bills={bills} handleDelete={handleDelete}/>}
+      { isLoading === true && show === false ? < LoadingDots isLoading={isLoading}/>  : null }
+
+      { user === null || show === true ? null :<Bills bills={bills} handleDelete={handleDelete}/>}
       { user === null ? <p>{currentDateString}</p> : null }
       <br/><br/>
       <p>____________________________</p>

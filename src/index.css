@@ -194,7 +194,7 @@ body {
   justify-content: center; /* Centra el div dentro del contenedor */
   text-align: center; /* Añade esta línea para centrar el texto */
   width: 50%; /* Asegura que el h3 ocupe todo el ancho disponible */
-  font-weight: bold;
+  /*font-weight: bold;*/
   border-radius: 10px;  
   cursor: pointer;
   padding: 4px;
@@ -223,7 +223,7 @@ body {
   justify-content: center; /* Centra el div dentro del contenedor */
   text-align: center; /* Añade esta línea para centrar el texto */
   width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
-  font-weight: bold;
+  /*font-weight: bold;*/
 }
 
 .headerForm {
