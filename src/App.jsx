@@ -120,6 +120,7 @@ const App = () => {
       
         setUser(user)
         setEmail('')
+        setRegister(false)
   
         setTypeMessage(true);
         setMessage(`Created user`);
@@ -129,7 +130,6 @@ const App = () => {
         setMessage(`Wrong credentials`);
         setTimeout(() => {setMessage(null)}, 5000);
       }
-  
       try {
         const user = await loginService.login({ username, password })
         setUser(user)
@@ -228,7 +228,7 @@ const App = () => {
           setCode={setCode}
         /> : null }
 
-      { register ? <button onClick={handleBack} className='backButton'>Back</button> : null }
+      { register && user === null ? <button onClick={handleBack} className='backButton'>Back</button> : null }
 
       { user !== null ? 
         <Header 
@@ -237,7 +237,7 @@ const App = () => {
           currentDate={currentDateString}/>: null   
       }
 
-      <LoadingDots isLoading={isLoading} />
+      { user !== null ? < LoadingDots isLoading={isLoading}/>  : null }
 
       { user === null ? null :
         <BillForm 
