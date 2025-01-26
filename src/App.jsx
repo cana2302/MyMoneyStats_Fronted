@@ -37,6 +37,10 @@ const App = () => {
   const [register, setRegister] = useState(false)
   const [show, setShow] = useState(false)
 
+  const [categories, setCategories] = useState([])
+  const [category_, setNewCategory_] = useState('')
+
+
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const [typeMessage, setTypeMessage] = useState();
@@ -144,7 +148,7 @@ const App = () => {
           setMessage('Something happen. Please try again');
         }
         setTypeMessage(false); 
-        setTimeout(() => { setMessage(null); }, 6000);
+        setTimeout(() => { setMessage(null); }, 5000);
       }
       /*
       if (message === 'Created user') {
@@ -190,6 +194,14 @@ const App = () => {
   const handleAmountChange = (event) => {
     setNewAmount(event.target.value);
   };
+
+  const handleCategoryChange_ = (event) => {
+    setNewCategory_(event.target.value);
+  };
+
+  const addCategory = () => {
+
+  }
 
   const handleDelete = (bill_id,bill_description) => {
     if (window.confirm(`Delete ${bill_description}?`)) {
