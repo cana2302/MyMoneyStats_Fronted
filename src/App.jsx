@@ -30,8 +30,10 @@ const App = () => {
 
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null) 
+  const [user, setUser] = useState(null)
+  const [email, setEmail] = useState('') 
   const [password1, setPassword1] = useState('')
+  const [code, setCode] = useState('')
   const [register, setRegister] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false);
@@ -79,7 +81,7 @@ const App = () => {
         
         setTypeMessage(true);
         setMessage(`Added '${newDescription}'`);
-        setTimeout(() => {setMessage(null)}, 8000);
+        setTimeout(() => {setMessage(null)}, 5000);
       })
   };
 
@@ -95,11 +97,11 @@ const App = () => {
 
       setTypeMessage(true);
       setMessage(`Authorized`);
-      setTimeout(() => {setMessage(null)}, 8000);
+      setTimeout(() => {setMessage(null)}, 5000);
     } catch {
       setTypeMessage(false);
       setMessage(`Wrong credentials`);
-      setTimeout(() => {setMessage(null)}, 8000);
+      setTimeout(() => {setMessage(null)}, 5000);
     }
   }
 
@@ -112,32 +114,39 @@ const App = () => {
   const handleCreateUser = async (event) => {
     event.preventDefault()
 
-    try {
-      const user = await userService.createUser({ username, password })
-    
-      setUser(user)
-      setUsername('')
-      setPassword('')
-
-      setTypeMessage(true);
-      setMessage(`Created user`);
-      setTimeout(() => {setMessage(null)}, 6000);
-    } catch {
+    if (password === password1){
+      try {
+        const user = await userService.createUser({ username, email, password, code })
+      
+        setUser(user)
+        setEmail('')
+  
+        setTypeMessage(true);
+        setMessage(`Created user`);
+        setTimeout(() => {setMessage(null)}, 5000);
+      } catch {
+        setTypeMessage(false);
+        setMessage(`Wrong credentials`);
+        setTimeout(() => {setMessage(null)}, 5000);
+      }
+  
+      try {
+        const user = await loginService.login({ username, password })
+        setUser(user)
+        setUsername('')
+        setPassword('')
+        setCode('')
+      } catch {
+        setTypeMessage(false);
+        setMessage(`Wrong credentials`);
+        setTimeout(() => {setMessage(null)}, 5000);
+      }
+    } else if (password !== password1) {
       setTypeMessage(false);
-      setMessage(`Wrong credentials`);
-      setTimeout(() => {setMessage(null)}, 8000);
+      setMessage(`The password must be the same`);
+      setTimeout(() => {setMessage(null)}, 5000);
     }
 
-    try {
-      const user = await loginService.login({ username, password })
-      setUser(user)
-      setUsername('')
-      setPassword('')
-    } catch {
-      setTypeMessage(false);
-      setMessage(`Wrong credentials`);
-      setTimeout(() => {setMessage(null)}, 8000);
-    }
   }
 
   const handleLogout = async (event) => {
@@ -168,7 +177,7 @@ const App = () => {
         .then(() => {
           setTypeMessage(true);
           setMessage(`Deleted '${bill_description}' from stats`);
-          setTimeout(() => {setMessage(null)}, 8000);
+          setTimeout(() => {setMessage(null)}, 5000);
 
           setBills(bills.filter(bill => bill.id !== bill_id));
         })
@@ -178,8 +187,11 @@ const App = () => {
   const handleBack = () => {
     setRegister(false)
     setUsername('')
+    setEmail('')
     setPassword('')
     setPassword1('')
+    setCode('')
+    setMessage(null)
   }
 
   return (
@@ -205,11 +217,15 @@ const App = () => {
         <CreateUserForm
           handleCreateUser={handleCreateUser}
           username={username} 
-          setUsername={setUsername} 
+          setUsername={setUsername}
+          email={email}
+          setEmail={setEmail} 
           password={password} 
           setPassword={setPassword}
           password1={password1}
           setPassword1={setPassword1}
+          code={code}
+          setCode={setCode}
         /> : null }
 
       { register ? <button onClick={handleBack} className='backButton'>Back</button> : null }

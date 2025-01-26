@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 const LoginForm = (props) => {
   return (
       <form onSubmit={props.handleLogin} className="loginForm">
@@ -7,13 +5,13 @@ const LoginForm = (props) => {
         <div className="form_date">
         <span>Username:</span>
         <span>
-          <input type="text" value={props.username} name="Username" onChange={({ target }) => props.setUsername(target.value.toLowerCase())} />
+          <input type="text" value={props.username} name="Username" onChange={({ target }) => props.setUsername(target.value.toLowerCase())} required/>
         </span>   
       </div>
       <div className="form_date">
         <span>Password:</span>
         <span>
-          <input type="password" value={props.password} name="Password" onChange={({ target }) => props.setPassword(target.value)} />
+          <input type="password" value={props.password} name="Password" onChange={({ target }) => props.setPassword(target.value)} required/>
         </span>
       </div>
       <div className="form_button">
