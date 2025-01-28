@@ -1,9 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  /*  box-sizing: border-box; Asegura que el padding y el borde no alteren el tamaño del elemento */
+}
+
 body {
   background-color: #2F3544;
   color: #E0E0E0;
   display: flex;               /* Activa el modelo Flexbox */
   justify-content: center;      /* Centra horizontalmente */
-  align-items: center;  
+  align-items: center; 
+}
+
+.app {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .app h2 {
@@ -19,6 +32,7 @@ body {
 
 #email {
   font-size: 10px;
+  margin-bottom: 10px;
 }
 
 .notification {
@@ -39,22 +53,50 @@ body {
   margin-bottom: 10px;
 }
 
-/* BillForm Component  ---START */
 
-.billForm {
+.billForm,
+.categoryForm,
+.loginForm {
   border: 1px solid #ccc; /* Borde sólido */
   border-radius: 10px; /* Esquinas redondeadas */
   padding: 15px; /* Añade espacio interno */
   margin-top: 15px; /* Añade espacio superior */
   display: flex;
   flex-direction: column; /* Coloca los elementos en una columna */
-  /*align-items: center; /* Centra los elementos dentro del formulario */
+  align-items: center; /* Centra los elementos dentro del formulario */
+  justify-content: space-around;
 }
 
-.billForm h3 {
+.userForm {
+  border: 1px solid #ccc; /* Borde sólido */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 15px; /* Añade espacio interno */
+  margin-top: 15px; /* Añade espacio superior */
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; /* Coloca los elementos en una columna */
+  align-items: center; /* Centra los elementos dentro del formulario */
+  justify-content: space-around;
+}
+
+.registerForm {
+  border: 1px solid #ccc; /* Borde sólido */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 15px; /* Añade espacio interno */
+  margin-top: 40px; /* Añade espacio superior */
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column; /* Coloca los elementos en una columna */
+  align-items: center; /* Centra los elementos dentro del formulario */
+  justify-content: space-around;
+}
+
+.billForm h3,
+.categoryForm h3 {
   margin-top: 2px; /* Reduce el espacio superior */
   margin-bottom: 8px; /* Reduce el espacio inferior */
-  justify-content: left; /* Centra el div dentro del contenedor */
+  text-align: left;
+  align-self: flex-start;
 }
 
 .form_category, 
@@ -65,24 +107,146 @@ body {
   display: grid;
   grid-template-columns: 1fr 2.3fr; /* Ajusta el ancho de las columnas */
   align-items: center;
+  width: 55%; /* Todos los divs ocupan el 80% del formulario */
+  margin: 0 auto; /* Centra el div en el formulario */
+  margin-bottom: 10px;
+}
+
+.userForm_button {
+  display: grid;
+  grid-template-columns: 1fr 2.3fr; /* Ajusta el ancho de las columnas */
+  align-items: center;
   width: 80%; /* Todos los divs ocupan el 80% del formulario */
   margin: 0 auto; /* Centra el div en el formulario */
   margin-bottom: 10px;
 }
 
-.form_category input, 
-.form_description input, 
-.form_amount input,
-.form_date input {
+.form_create_user {
+  display: grid;
+  grid-template-columns: 1fr 2.3fr; /* Ajusta el ancho de las columnas */
+  align-items: center;
+  width: 80%; /* Todos los divs ocupan el 80% del formulario */
+  margin: 0 auto; /* Centra el div en el formulario */
+  margin-bottom: 10px;
+}
+
+.form_login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 82%; /* Todos los divs ocupan el 80% del formulario */
+  margin: 0 auto; /* Centra el div en el formulario */
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.form_login_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 82%;
+ }
+
+ .userForm_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 80%;
+ }
+
+ .form_login_button_register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 82%;
+ }
+
+.form_login input {
   width: 100%; /* Los inputs ocupan todo el ancho disponible */
   border: 1px solid #ccc; /* Borde de los inputs */
   border-radius: 5px; /* Esquinas redondeadas */
+  text-align: left;
 }
 
-.form_button {
+
+.form_category input, 
+.form_description input, 
+.form_amount input,
+.form_date input,
+.form_category_input input,
+.form_create_user input {
+  width: 100%; /* Los inputs ocupan todo el ancho disponible */
+  border: 1px solid #ccc; /* Borde de los inputs */
+  border-radius: 5px; /* Esquinas redondeadas */
+  text-align: center;
+}
+
+.form_category_input,
+.list_category {
+  display: flex;
+  flex-direction: row; /* Coloca los elementos en una columna */
+  align-items: baseline;
+  justify-content: space-around;
+  width: 55%;
+  height: fit-content;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.list_category_father {
+  margin-top: 15px; /* Añade espacio superior */
+  display: flex;
+  flex-direction: column; /* Coloca los elementos en una columna */
+  align-items: center; /* Centra los elementos dentro del formulario */
+  justify-content: space-around;
+  width: 100%;
+}
+
+.list_category p {
+  width: 100%; /* Los inputs ocupan todo el ancho disponible */
+  text-align: left;
+  line-height: 0;
+  height: auto;
+  margin-top: 1px;
+}
+
+.registerForm h4 {
+  margin-top: 8px; /* Reduce el espacio superior */
+  justify-content: center; /* Centra el div dentro del contenedor */
+  text-align: center; /* Añade esta línea para centrar el texto */
+  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
+}
+
+.form_category_input button,
+.list_category button {
+  cursor: pointer;
+  border-radius: 5px; /* Esquinas redondeadas */
+  width: 25%;
+  padding: 1px;
+}
+
+.form_button,
+.userForm_button {
   display: flex;
   justify-content: center; /* Centra el botón dentro del contenedor */
   margin-top: 10px;
+}
+
+.userForm_button button {
+  margin-top: 16px; /* Reduce el espacio superior */
+  margin-bottom: 12px; /* Reduce el espacio inferior */
+  justify-content: center; /* Centra el div dentro del contenedor */
+  text-align: center; /* Añade esta línea para centrar el texto */
+  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
+  font-weight: bold;
+  border-radius: 10px;  
+  cursor: pointer;
+  padding: 8px;
 }
 
 .form_button button {
@@ -91,10 +255,16 @@ body {
   cursor: pointer;
   border-radius: 10px; /* Esquinas redondeadas */
 }
-/* BillForm Component  ---END */
 
+.form_login_button button,
+.form_login_button_register button {
+  width: 100%; /* El botón ocupa todo el ancho del div .form_button */
+  padding: 8px; /* Espacio interno del botón */
+  cursor: pointer;
+  border-radius: 10px; /* Esquinas redondeadas */
+  margin-bottom: 12px;
+}
 
-/* Bills Component  ---START */
 .bill-border {
   border: 1px solid #ccc; /* Borde sólido */
   border-radius: 10px; /* Esquinas redondeadas */
@@ -150,28 +320,16 @@ body {
 .bill-header span:nth-child(5) {
   text-align: center; /* Posiciona el texto del encabezado action al centro */
 }
-/* Bills Component  ---END */
-
-
-  /*
-body {
-  background-color: #343541; 
-  color: #E0E0E0; /* Texto en un gris claro para mejor legibilidad 
-}
-  */
-
-.loginForm {
-  border: 1px solid #ccc; /* Borde sólido */
-  border-radius: 10px; /* Esquinas redondeadas */
-  padding: 15px; /* Añade espacio interno */
-  margin-bottom: 30px;
-  margin-top: 30px; /* Añade espacio superior */
-  display: flex;
-  flex-direction: column; /* Coloca los elementos en una columna */
-  /*align-items: center; /* Centra los elementos dentro del formulario */
-}
 
 .loginForm h3 {
+  margin-top: 8px; /* Reduce el espacio superior */
+  margin-bottom: 25px; /* Reduce el espacio inferior */
+  justify-content: center; /* Centra el div dentro del contenedor */
+  text-align: center; /* Añade esta línea para centrar el texto */
+  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
+}
+
+.userForm h3 {
   margin-top: 8px; /* Reduce el espacio superior */
   margin-bottom: 25px; /* Reduce el espacio inferior */
   justify-content: center; /* Centra el div dentro del contenedor */
@@ -189,7 +347,7 @@ body {
 }
 
 .backButton {
-  margin-top: 16px; /* Reduce el espacio superior */
+  margin-top: 20px; /* Reduce el espacio superior */
   margin-bottom: 12px; /* Reduce el espacio inferior */
   justify-content: center; /* Centra el div dentro del contenedor */
   text-align: center; /* Añade esta línea para centrar el texto */
@@ -201,86 +359,37 @@ body {
   margin-left: 25%;
 }
 
-.registerForm {
-  border: 1px solid #ccc; /* Borde sólido */
-  border-radius: 10px; /* Esquinas redondeadas */
-  padding: 15px; /* Añade espacio interno */
-  margin-bottom: 30px;
-  margin-top: 40px; /* Añade espacio superior */
-  display: flex;
-  flex-direction: column; /* Coloca los elementos en una columna */
-  /*align-items: center; /* Centra los elementos dentro del formulario */
-}
 
-.registerForm h4 {
-  margin-top: 8px; /* Reduce el espacio superior */
-  justify-content: center; /* Centra el div dentro del contenedor */
-  text-align: center; /* Añade esta línea para centrar el texto */
-  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
-}
+/* ---- Header ----- */
 
-.registerForm button {
-  justify-content: center; /* Centra el div dentro del contenedor */
-  text-align: center; /* Añade esta línea para centrar el texto */
-  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
-  /*font-weight: bold;*/
+.div_headerForm {
+  width: 70%;
+  align-self: center;
 }
 
 .headerForm {
-  border: 1px solid #ccc; /* Borde sólido */
-  border-radius: 10px; /* Esquinas redondeadas */
-  /*margin-top: 10px;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline; /* Centra los elementos dentro del formulario */
   margin-bottom: 30px; 
-  display: flex;
-  flex-direction: row; /* Coloca los elementos en una columna */
-  /*align-items: center; /* Centra los elementos dentro del formulario */
 }
 
-.headerForm h3 {
-  justify-content: center; /* Centra el div dentro del contenedor */
-  text-align: center; /* Añade esta línea para centrar el texto */
-  width: 100%; /* Asegura que el h3 ocupe todo el ancho disponible */
-}
-
-/*
 .headerForm button {
-  justify-content: left; 
-  text-align: center; 
-  width: 20%; 
   font-weight: bold;
-}*/
-
-.form_button_header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30%;
-}
-
-.form_button_header button {
-  font-weight: bold;
-  width: 100%; /* El botón ocupa todo el ancho del div .form_button */
-  padding: 8px;
+  padding: 2px;
   cursor: pointer;
-  border-radius: 10px
+  border-radius: 8px;
+  align-items: center;
 }
 
 .user_div {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  text-align: right;
-  width: 35%;
+  align-items: center;
+  width: 40%;
 }
 
-.user_div p {
+#username {
   margin-left: 10px;
-}
-
-.date_div {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  width: 30%;
 }

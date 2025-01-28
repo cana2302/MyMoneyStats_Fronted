@@ -8,12 +8,14 @@ import RegisterForm from './components/RegisterForm';
 import CreateUserForm from './components/CreateUser';
 import Notification from './components/Notification';
 import LoadingDots from './components/Loading';
+import CategoryBillForm from './components/CategoryForm';
 
 import billsService from './services/bills-service';
 import loginService from './services/login'
 import logoutService from './services/logout'
 import sessionService from './services/session';
 import userService from './services/user'
+
 
 const App = () => {
 
@@ -37,8 +39,8 @@ const App = () => {
   const [register, setRegister] = useState(false)
   const [show, setShow] = useState(false)
 
-  const [categories, setCategories] = useState([])
-  const [category_, setNewCategory_] = useState('')
+  const [categories, setCategories] = useState(['Supermarket','Car','Taxes'])
+  const [newCategory_, setNewCategory_] = useState('')
 
 
   const [isLoading, setIsLoading] = useState(false);
@@ -203,6 +205,10 @@ const App = () => {
 
   }
 
+  const deleteCategory = () => {
+    
+  }
+
   const handleDelete = (bill_id,bill_description) => {
     if (window.confirm(`Delete ${bill_description}?`)) {
       billsService._delete(bill_id)
@@ -268,6 +274,15 @@ const App = () => {
           user={user}
           currentDate={currentDateString}/>: null   
       }
+
+      { user === null || show === true ? null :
+        <CategoryBillForm 
+          addCategory={addCategory}
+          newCategory_={newCategory_}
+          handleCategoryChange_={handleCategoryChange_}
+          categories={categories}
+          deleteCategory={deleteCategory}
+        />}
 
       { user === null || show === true ? null :
         <BillForm 

@@ -1,26 +1,30 @@
 const CategoryBillForm = (props) => {
 
   return (
-    <>
-      <form onSubmit={props.addCategory} className="billForm">
-        <h3>Add a new category</h3>
-        <div className="form_date">
-          <span>Category name:</span>
-          <span>
-            <input type="date" value={props.newCategory_} onChange={props.handleCategoryChange_} />
-          </span>        
-        </div>              
-        <div className="form_button">
-            <button type="submit">Add</button>
-        </div>
+    <div className="categoryForm">
+      <h3>Categories</h3>
+      <form onSubmit={props.addCategory} className="form_category_input">
+        <input type="text" value={props.newCategory_} onChange={props.handleCategoryChange_} placeholder=" New category" />
+        <button type="submit">Add</button>                
       </form>
-
-      <div className="form_category">
-        <span>Categories:</span>
-        <span> { props.categories.map((category) => (<p>{category}</p>)) } </span>        
+      <div className="list_category_father">
+        {props.categories.map((category, index) => (
+          <div key={index} className="list_category">
+            <p>-&nbsp;{category}</p>
+            <button onClick={() => props.deleteCategory(index)}>Delete</button>
+          </div>
+          ))}   
       </div>
-    </>
+    </div>
   )
 }
 
 export default CategoryBillForm
+
+/*
+<div className="form_button">
+    <button type="submit">Add</button>
+</div>
+
+style={{ flex: "3" }}
+*/

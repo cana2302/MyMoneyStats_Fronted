@@ -4,7 +4,7 @@ const BillForm = (props) => {
       <form onSubmit={props.addBill} className="billForm">
         <h3>Add a new bill</h3>
         <div className="form_amount">
-          <span>Amount:&nbsp;&nbsp;&#91;&nbsp;€&nbsp;&#93;</span>
+          <span>Amount:&nbsp;&nbsp;€&nbsp;</span>
           <span>
             <input type="number" min="1" step="any" value={props.newAmount} onChange={props.handleAmountChange} />
           </span>        
