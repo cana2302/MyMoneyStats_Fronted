@@ -18,7 +18,12 @@ const BillForm = (props) => {
         <div className="form_category">
           <span>Category:</span>
           <span>
-            <input type="text" maxLength="20" value={props.newCategory} onChange={props.handleCategoryChange} />
+            <select type="text" value={props.newCategory} onChange={props.handleCategoryChange}>
+              <option value="">&nbsp;&nbsp;Select category&nbsp;&nbsp;</option>
+              {props.categories.map((category, index) => (
+                <option key={index} value={category}>{category}</option>
+              ))}
+            </select>
           </span>        
         </div>
         <div className="form_date">

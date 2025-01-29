@@ -39,7 +39,7 @@ const App = () => {
   const [register, setRegister] = useState(false)
   const [show, setShow] = useState(false)
 
-  const [categories, setCategories] = useState(['Supermarket','Car','Taxes'])
+  const [categories, setCategories] = useState([])
   const [newCategory_, setNewCategory_] = useState('')
 
 
@@ -48,30 +48,31 @@ const App = () => {
   const [typeMessage, setTypeMessage] = useState();
 
   useEffect(() => {
-    sessionService
-      .getSession()
-      .then((user)=>{setUser(user)})  // Object { id: "678828c363011448e3384", username: "can222", role: "user" }
-      .catch(() => {
-        console.log('No sesion')
-      });
-  }, []);
+    const getSessionAndBills = async () => {
+      try { 
+        const userSession = await sessionService.getSession()
+        setUser(userSession)
 
-  useEffect(() => {
-    if (user !== null) {
-      setIsLoading(true);
-      billsService
-        .getAll()
-        .then(initialBills => {
+        if (userSession) {
+          setIsLoading(true)
+          const initialBills = await billsService.getAll()
           setBills(initialBills)
+
+          const uniqueCategories = [...new Set(initialBills.map(bill => bill.category))]
+          setCategories(uniqueCategories)
+
           setIsLoading(false)
-        })
-        .catch(() => {
-          console.log('No sesion')
-        });
-    } else {
-      setBills([])
+        } else {
+          setBills([])
+          setCategories([])
+        }
+      } catch (error) {
+        console.log('No sesion')
+        setIsLoading(false)
+      } 
     }
-  }, [user]);
+    getSessionAndBills() 
+  }, [])
 
   const addBill = (event) => {
     event.preventDefault()
@@ -295,6 +296,7 @@ const App = () => {
           handleDescriptioChange={handleDescriptionChange}
           newAmount={newAmount} 
           handleAmountChange={handleAmountChange}
+          categories={categories}
         />}
 
       { isLoading === true && show === false ? < LoadingDots isLoading={isLoading}/>  : null }
