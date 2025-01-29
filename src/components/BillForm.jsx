@@ -6,13 +6,13 @@ const BillForm = (props) => {
         <div className="form_amount">
           <span>Amount:&nbsp;&nbsp;€&nbsp;</span>
           <span>
-            <input type="number" min="1" step="any" value={props.newAmount} onChange={props.handleAmountChange} />
+            <input id ='amount' type="number" min="1" step="any" value={props.newAmount} onChange={props.handleAmountChange} />
           </span>        
         </div> 
         <div className="form_description">
           <span>Description:</span>
           <span>
-            <input type="text" maxLength="30" value={props.newDescription} onChange={props.handleDescriptioChange} />
+            <input id='billForm_descrip' type="text" maxLength="30" value={props.newDescription} onChange={props.handleDescriptioChange} />
           </span>  
         </div>
         <div className="form_category">

@@ -20,11 +20,3 @@ const CategoryBillForm = (props) => {
 }
 
 export default CategoryBillForm
-
-/*
-<div className="form_button">
-    <button type="submit">Add</button>
-</div>
-
-style={{ flex: "3" }}
-*/

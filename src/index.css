@@ -21,7 +21,7 @@ body {
 
 .app h2 {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 25px;
   margin-bottom: 20px;
 }
 
@@ -33,6 +33,14 @@ body {
 #email {
   font-size: 10px;
   margin-bottom: 10px;
+}
+
+#amount {
+  text-align: right;
+}
+
+#billForm_descrip{
+  text-align: left;
 }
 
 .notification {
@@ -53,6 +61,13 @@ body {
   margin-bottom: 10px;
 }
 
+.billsDiv h4{
+  margin-top: 6px;
+}
+
+.billsDiv h3{
+  margin-top: 12px;
+}
 
 .billForm,
 .categoryForm,
@@ -279,6 +294,7 @@ body {
   font-weight: bold; /* Negrita para el encabezado */
   padding-bottom: 10px; /* Espacio debajo del encabezado */
   border-bottom: 2px solid #ccc; /* Línea separadora opcional */
+  margin-bottom: 6px;
 }
 
 .bills-list {
@@ -372,7 +388,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline; /* Centra los elementos dentro del formulario */
-  margin-bottom: 30px; 
+  margin-bottom: 25px; 
 }
 
 .headerForm button {

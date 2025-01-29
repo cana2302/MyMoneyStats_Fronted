@@ -5,7 +5,7 @@ const Bills = (props) => {
   }, 0);
 
   return (
-    <>
+    <div className="billsDiv">
       <h3>Total is: € <b>{total.toFixed(2)}</b>.-</h3>
       <h4>My Bills:</h4>
 
@@ -34,7 +34,7 @@ const Bills = (props) => {
         </ul>
 
       </div>
-    </>
+    </div>
   )
 }
 

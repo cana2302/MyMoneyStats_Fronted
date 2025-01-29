@@ -48,31 +48,35 @@ const App = () => {
   const [typeMessage, setTypeMessage] = useState();
 
   useEffect(() => {
-    const getSessionAndBills = async () => {
-      try { 
-        const userSession = await sessionService.getSession()
-        setUser(userSession)
+    const checkSession = async () => {
+      try {
+        const userSession = await sessionService.getSession();
+        setUser(userSession);  // Object { id: "678828c363011448e3384", username: "can222", role: "user" }
+      } catch (error) {
+        console.log('No sesion');
+      }
+    };
+    checkSession(); // Se ejecuta solo cuando el componente se monta
+  }, []);
 
-        if (userSession) {
+  useEffect(() => {
+    if (user) {          // Solo ejecuta si hay un usuario presente
+      const getSessionAndBills = async () => {
+        try {
           setIsLoading(true)
           const initialBills = await billsService.getAll()
           setBills(initialBills)
-
           const uniqueCategories = [...new Set(initialBills.map(bill => bill.category))]
           setCategories(uniqueCategories)
-
+          setIsLoading(false)          
+        } catch (error) {
+          console.log('Error when loading Bills and Categories')
           setIsLoading(false)
-        } else {
-          setBills([])
-          setCategories([])
-        }
-      } catch (error) {
-        console.log('No sesion')
-        setIsLoading(false)
-      } 
-    }
-    getSessionAndBills() 
-  }, [])
+        } 
+      }
+    getSessionAndBills()
+    } 
+  }, [user]) // al cambiar de usuario se vuelve a ejecutar
 
   const addBill = (event) => {
     event.preventDefault()
@@ -82,7 +86,7 @@ const App = () => {
     .create(billObject)
       .then(returnedBill => {
         setBills([...bills,returnedBill]);
-        setNewDate('');
+        setNewDate(formattedDate);
         setNewCategory('');
         setNewDescription('');
         setNewAmount('');
@@ -202,12 +206,16 @@ const App = () => {
     setNewCategory_(event.target.value);
   };
 
-  const addCategory = () => {
-
+  const addCategory = (event) => {
+    event.preventDefault() // Evita que la página se recargue al enviar el formulario
+    if (newCategory_.trim() !== '') { // Verifica que el valor no esté vacío
+      setCategories([...categories, newCategory_]); // Agrega la nueva categoría al estado
+      setNewCategory_(''); // Limpia el input después de agregar la categoría
+    }
   }
 
-  const deleteCategory = () => {
-    
+  const deleteCategory = (indexToDelete) => {
+    setCategories(categories.filter((_, index) => index !== indexToDelete))
   }
 
   const handleDelete = (bill_id,bill_description) => {
