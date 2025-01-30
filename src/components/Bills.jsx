@@ -9,6 +9,26 @@ const Bills = (props) => {
       <h3>Total is: € <b>{total.toFixed(2)}</b>.-</h3>
       <h4>My Bills:</h4>
 
+      <div className="search_bills">
+        <button id='back_button' onClick={props.handleBackButton}>&lt;</button>
+        <div className="search_bills_son">
+          <select name="monthSelect" value={props.monthToSearch} onChange={props.handleMonthChangeSelect}>
+            <option value={props.monthToSearch}>{props.monthToSearch}</option>
+            {props.monthsArray.map((month, index) => (
+              <option key={index} value={month}>{month}</option>
+            ))}
+          </select>
+          <select name="yearSelect" value={props.yearToSearch} onChange={props.handleYearChangeSelect}>
+            <option value={props.yearToSearch}>{props.yearToSearch}</option>
+            {props.yearsArray.map((year, index) => (
+              <option key={index} value={year}>{year}</option>
+            ))}
+          </select>
+          <button onClick={props.handleSearchBills}>Search</button>
+        </div>
+        <button id='next_button' onClick={props.handleNextButton}>&gt;</button>
+      </div>
+
       <div className="bill-border">
 
         <div className="bill-header">

@@ -109,7 +109,7 @@ body {
 .billForm h3,
 .categoryForm h3 {
   margin-top: 2px; /* Reduce el espacio superior */
-  margin-bottom: 8px; /* Reduce el espacio inferior */
+  margin-bottom: 5px; /* Reduce el espacio inferior */
   text-align: left;
   align-self: flex-start;
 }
@@ -189,7 +189,7 @@ body {
 }
 
 
-.form_category input, 
+.form_category select, 
 .form_description input, 
 .form_amount input,
 .form_date input,
@@ -199,6 +199,50 @@ body {
   border: 1px solid #ccc; /* Borde de los inputs */
   border-radius: 5px; /* Esquinas redondeadas */
   text-align: center;
+}
+
+.search_bills {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items:baseline;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.search_bills_son {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  width: 86%;
+}
+
+.search_bills_son select,
+.search_bills_son button {
+  border: 1px solid #000000; /* Borde de los inputs */
+  border-radius: 5px; /* Esquinas redondeadas */
+  text-align: center;
+  margin-left: 2px;
+  cursor: pointer;
+}
+
+.search_bills_son select {
+  width: 20%;
+}
+
+.search_bills_son button {
+  width: 14%;
+}
+
+#back_button, 
+#next_button {
+  width: 7%; /* Los inputs ocupan todo el ancho disponible */
+  border: 1px solid #000000; /* Borde de los inputs */
+  border-radius: 5px; /* Esquinas redondeadas */
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .form_category_input,
@@ -214,7 +258,7 @@ body {
 }
 
 .list_category_father {
-  margin-top: 15px; /* Añade espacio superior */
+  margin-top: 8px; /* Añade espacio superior */
   display: flex;
   flex-direction: column; /* Coloca los elementos en una columna */
   align-items: center; /* Centra los elementos dentro del formulario */

@@ -16,12 +16,84 @@ import logoutService from './services/logout'
 import sessionService from './services/session';
 import userService from './services/user'
 
-
 const App = () => {
 
   const currentDate = new Date();
   const currentDateString = currentDate.toDateString();
-  const formattedDate = currentDate.toISOString().split('T')[0]; // Esto te da la fecha en formato yyyy-MM-dd
+  let formattedDate = currentDate.toISOString().split('T')[0]; // Esto te da la fecha en formato yyyy-MM-dd
+
+  let current_year = formattedDate.split('-')[0];
+  let current_month = formattedDate.split('-')[1];
+
+  const [monthToSearch, setMonthToSearch] = useState(current_month) 
+  const [monthsArray, setMonthsArray] = useState([])
+  const [yearToSearch, setYearToSearch] = useState(current_year)
+  const [yearsArray, setYearsArray] = useState([])
+
+
+  const handleYearChangeSelect = (event) => {
+    setYearToSearch(event.target.value); // Guarda el valor del año seleccionado
+  };
+
+  const handleMonthChangeSelect = (event) => {
+    setMonthToSearch(event.target.value); // Guarda el valor del mes seleccionado
+  };
+
+  const handleSearchBills = () => {
+    searchBills(yearToSearch, monthToSearch);
+  };
+  
+  const handleBackButton = () => {
+    if (monthToSearch === '01') {
+      const monthBack = '12'
+      const yearBack = Number(yearToSearch) - 1
+      setMonthToSearch(monthBack.toString())
+      setYearToSearch(yearBack.toString())
+    } else if (monthToSearch === '10' || monthToSearch === '09' || monthToSearch === '08' || monthToSearch === '07' || monthToSearch === '06' || monthToSearch === '05' || monthToSearch === '04' || monthToSearch === '03' || monthToSearch === '02'){
+      const monthBack = Number(monthToSearch) - 1
+      setMonthToSearch('0'+monthBack.toString())
+    } else if (monthToSearch === '12' || monthToSearch === '11'){
+      const monthBack = Number(monthToSearch) - 1
+      setMonthToSearch(monthBack.toString())
+    }
+    searchBills(yearToSearch, monthToSearch)
+  }
+
+  const handleNextButton = () => {
+    if (monthToSearch === '12') {
+      const monthNext = '01'
+      const yearNext = Number(yearToSearch) + 1
+      setMonthToSearch(monthNext.toString())
+      setYearToSearch(yearNext.toString())
+    } else if (monthToSearch === '01' || monthToSearch === '02' || monthToSearch === '03' || monthToSearch === '04' || monthToSearch === '05' || monthToSearch === '06' || monthToSearch === '07' || monthToSearch === '08'){
+      const monthNext = Number(monthToSearch) + 1
+      setMonthToSearch('0'+monthNext.toString())
+    } else if (monthToSearch === '09' || monthToSearch === '10' || monthToSearch === '11') {
+      const monthNext = Number(monthToSearch) + 1
+      setMonthToSearch(monthNext.toString())
+    }
+    searchBills(yearToSearch, monthToSearch)
+  }
+
+  const searchBills = async (year, month) => {
+    try {
+      setIsLoading(true)
+      const allBills = await billsService.getAll()
+      const filteredBills = allBills.filter(bill => {
+        const billYear = bill.date.split('-')[0]; // Extrae el año de cada objeto
+        const billMonth = bill.date.split('-')[1]; // Extrae el mes de cada objeto
+        return billYear === year && billMonth === month;
+      });
+      setBills(filteredBills)
+      setIsLoading(false)  
+    } catch (error) {
+      console.log('Error when loading Bills and Categories')
+      setIsLoading(false)
+    } 
+  }
+
+  /* TODO:
+  /* Agregar flechas para desplegar o contraer los divs Category y Add new bill*/
 
   // Hooks:
   const [bills, setBills] = useState([]); 
@@ -64,10 +136,21 @@ const App = () => {
       const getSessionAndBills = async () => {
         try {
           setIsLoading(true)
-          const initialBills = await billsService.getAll()
-          setBills(initialBills)
-          const uniqueCategories = [...new Set(initialBills.map(bill => bill.category))]
+          const allBills = await billsService.getAll()
+
+          const filteredBills = allBills.filter(bill => {
+            const billYear = bill.date.split('-')[0]; // Extrae el año de cada objeto
+            const billMonth = bill.date.split('-')[1]; // Extrae el mes de cada objeto
+            return billYear === current_year && billMonth === current_month;
+          });
+
+          setBills(filteredBills)
+          const uniqueCategories = [...new Set(allBills.map(bill => bill.category))]
           setCategories(uniqueCategories)
+          const uniqueYears = [...new Set(allBills.map(year => year.date.split('-')[0]))]
+          setYearsArray(uniqueYears)
+          const uniqueMonths = [...new Set(allBills.map(month => month.date.split('-')[1]))]
+          setMonthsArray(uniqueMonths)
           setIsLoading(false)          
         } catch (error) {
           console.log('Error when loading Bills and Categories')
@@ -245,6 +328,12 @@ const App = () => {
     <div className="app">
 
       <h2>My Money Stats - WebApp</h2>
+      { user !== null && show === false ? 
+        <Header 
+          handleLogout={handleLogout} 
+          user={user}
+          currentDate={currentDateString}/>: null   
+      }
       <Notification message={message} messageType={typeMessage}/>
 
       { user === null && register === false || show === true ? 
@@ -277,12 +366,6 @@ const App = () => {
 
       { register && user === null ? <button onClick={handleBack} className='backButton'>Back</button> : null }
 
-      { user !== null && show === false ? 
-        <Header 
-          handleLogout={handleLogout} 
-          user={user}
-          currentDate={currentDateString}/>: null   
-      }
 
       { user === null || show === true ? null :
         <CategoryBillForm 
@@ -309,7 +392,22 @@ const App = () => {
 
       { isLoading === true && show === false ? < LoadingDots isLoading={isLoading}/>  : null }
 
-      { user === null || show === true ? null :<Bills bills={bills} handleDelete={handleDelete}/>}
+      { user === null || show === true ? null :
+        <Bills 
+          bills={bills}
+          handleDelete={handleDelete}
+          handleYearChangeSelect = {handleYearChangeSelect}
+          handleMonthChangeSelect = {handleMonthChangeSelect}
+          yearToSearch = {yearToSearch}
+          monthToSearch = {monthToSearch}
+          yearsArray = {yearsArray}
+          monthsArray = {monthsArray}
+          handleSearchBills = {handleSearchBills}
+          handleBackButton = {handleBackButton}
+          handleNextButton = {handleNextButton}
+        />
+      }
+
       { user === null ? <p>{currentDateString}</p> : null }
       <br/><br/>
       <p>____________________________</p>
