@@ -25,6 +25,8 @@ return (
 export default LoadingDots;
 
 /*
+, padding: '20px'
+
 fontWeight: 'bold'
 position: 'absolute',
 top: '50%',

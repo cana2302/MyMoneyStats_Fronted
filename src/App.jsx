@@ -267,6 +267,11 @@ const App = () => {
     event.preventDefault()
     await logoutService.logout()
     setUser(null)
+    setBills([])
+    setMonthToSearch(current_month)
+    setYearToSearch(current_year)
+    setYearsArray([])
+    setMonthsArray([])
   }
 
   const handleDateChange = (event) => {
@@ -390,7 +395,7 @@ const App = () => {
           categories={categories}
         />}
 
-      { isLoading === true && show === false ? < LoadingDots isLoading={isLoading}/>  : null }
+      { isLoading === true && show === false ? < LoadingDots isLoading={isLoading}/> : null }
 
       { user === null || show === true ? null :
         <Bills 
@@ -418,3 +423,11 @@ const App = () => {
 };
 
 export default App
+
+
+/*
+{ isLoading === true && show === false ? < LoadingDots isLoading={isLoading}/>  : null }
+
+{ user === null || show === true ? null :
+
+*/
