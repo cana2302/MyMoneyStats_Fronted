@@ -49,14 +49,17 @@ const App = () => {
       const yearBack = Number(yearToSearch) - 1
       setMonthToSearch(monthBack.toString())
       setYearToSearch(yearBack.toString())
+      searchBills(yearToSearch, monthToSearch) //
     } else if (monthToSearch === '10' || monthToSearch === '09' || monthToSearch === '08' || monthToSearch === '07' || monthToSearch === '06' || monthToSearch === '05' || monthToSearch === '04' || monthToSearch === '03' || monthToSearch === '02'){
       const monthBack = Number(monthToSearch) - 1
       setMonthToSearch('0'+monthBack.toString())
+      searchBills(yearToSearch, monthToSearch) //
     } else if (monthToSearch === '12' || monthToSearch === '11'){
       const monthBack = Number(monthToSearch) - 1
       setMonthToSearch(monthBack.toString())
+      searchBills(yearToSearch, monthToSearch) //
     }
-    searchBills(yearToSearch, monthToSearch)
+    // searchBills(yearToSearch, monthToSearch)
   }
 
   const handleNextButton = () => {
