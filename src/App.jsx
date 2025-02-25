@@ -44,6 +44,7 @@ const App = () => {
   };
   
   const handleBackButton = () => {
+
     if (monthToSearch === '01') {
       const monthBack = '12'
       const yearBack = Number(yearToSearch) - 1
@@ -94,6 +95,10 @@ const App = () => {
       setIsLoading(false)
     } 
   }
+
+  useEffect(() => {
+    searchBills(yearToSearch, monthToSearch);
+  }, [yearToSearch, monthToSearch]);
 
   /* TODO:
   /* Agregar flechas para desplegar o contraer los divs Category y Add new bill*/
