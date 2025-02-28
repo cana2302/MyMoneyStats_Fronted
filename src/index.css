@@ -189,8 +189,6 @@ body {
   text-align: left;
 }
 
-
-.form_category select, 
 .form_description input, 
 .form_amount input,
 .form_date input,
@@ -200,6 +198,13 @@ body {
   border: 1px solid #ccc; /* Borde de los inputs */
   border-radius: 5px; /* Esquinas redondeadas */
   text-align: center;
+}
+
+.form_category select {
+  width: 100%; /* Los inputs ocupan todo el ancho disponible */
+  border: 1px solid #ccc; /* Borde de los inputs */
+  border-radius: 5px; /* Esquinas redondeadas */
+  text-align: left;
 }
 
 .search_bills {

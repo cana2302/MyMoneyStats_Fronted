@@ -44,39 +44,43 @@ const App = () => {
   };
   
   const handleBackButton = () => {
+    let newMonth, newYear;
 
     if (monthToSearch === '01') {
-      const monthBack = '12'
-      const yearBack = Number(yearToSearch) - 1
-      setMonthToSearch(monthBack.toString())
-      setYearToSearch(yearBack.toString())
-      searchBills(yearToSearch, monthToSearch) //
+      newMonth = '12';
+      newYear = Number(yearToSearch) - 1;
     } else if (monthToSearch === '10' || monthToSearch === '09' || monthToSearch === '08' || monthToSearch === '07' || monthToSearch === '06' || monthToSearch === '05' || monthToSearch === '04' || monthToSearch === '03' || monthToSearch === '02'){
-      const monthBack = Number(monthToSearch) - 1
-      setMonthToSearch('0'+monthBack.toString())
-      searchBills(yearToSearch, monthToSearch) //
+      newMonth = '0' + (Number(monthToSearch) - 1).toString();
+      newYear = yearToSearch;
     } else if (monthToSearch === '12' || monthToSearch === '11'){
-      const monthBack = Number(monthToSearch) - 1
-      setMonthToSearch(monthBack.toString())
-      searchBills(yearToSearch, monthToSearch) //
+      newMonth = (Number(monthToSearch) - 1).toString();
+      newYear = yearToSearch;
     }
-    // searchBills(yearToSearch, monthToSearch)
+    //Actualiza el useState
+    setMonthToSearch(newMonth);
+    setYearToSearch(newYear.toString());
+    //Llama a la función de busqueda luego de actualizar el estado
+    searchBills(newYear.toString(), newMonth);
   }
 
   const handleNextButton = () => {
+    let newMonth, newYear;
+
     if (monthToSearch === '12') {
-      const monthNext = '01'
-      const yearNext = Number(yearToSearch) + 1
-      setMonthToSearch(monthNext.toString())
-      setYearToSearch(yearNext.toString())
+      newMonth = '01';
+      newYear = Number(yearToSearch) + 1;
     } else if (monthToSearch === '01' || monthToSearch === '02' || monthToSearch === '03' || monthToSearch === '04' || monthToSearch === '05' || monthToSearch === '06' || monthToSearch === '07' || monthToSearch === '08'){
-      const monthNext = Number(monthToSearch) + 1
-      setMonthToSearch('0'+monthNext.toString())
+      newMonth = '0' + (Number(monthToSearch) + 1).toString();
+      newYear = yearToSearch;
     } else if (monthToSearch === '09' || monthToSearch === '10' || monthToSearch === '11') {
-      const monthNext = Number(monthToSearch) + 1
-      setMonthToSearch(monthNext.toString())
+      newMonth = (Number(monthToSearch) + 1).toString();
+      newYear = yearToSearch;
     }
-    searchBills(yearToSearch, monthToSearch)
+    //Actualiza el useState
+    setMonthToSearch(newMonth);
+    setYearToSearch(newYear.toString());
+    // Llamar a searchBills después de actualizar el estado
+    searchBills(newYear.toString(), newMonth);
   }
 
   const searchBills = async (year, month) => {
@@ -95,10 +99,6 @@ const App = () => {
       setIsLoading(false)
     } 
   }
-
-  useEffect(() => {
-    searchBills(yearToSearch, monthToSearch);
-  }, [yearToSearch, monthToSearch]);
 
   /* TODO:
   /* Agregar flechas para desplegar o contraer los divs Category y Add new bill*/
